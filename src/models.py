@@ -2,7 +2,7 @@ import torch
 import torchaudio
 from torch import nn
 
-from modules import ResFrontEnd, Transformer
+from .modules import ResFrontEnd, Transformer
 
 
 class MusicTaggingTransformer(nn.Module):
@@ -86,7 +86,10 @@ class MusicTaggingTransformer(nn.Module):
 
         # projection for sequence classification
         x = self.to_latent(x[:, 0])
-        x = self.mlp_head(x)
-        x = self.sigmoid(x)
+
+        # disable classification head 
+        #x = self.mlp_head(x)
+        #x = self.sigmoid(x)
+        
         return x
 
